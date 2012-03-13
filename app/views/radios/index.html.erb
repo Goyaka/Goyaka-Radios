@@ -1,1 +1,30 @@
-<%= debug(@submissions) %>
+<ul class="nav nav-pills">
+  <li class="active">
+    <a href="/">Trending songs</a>
+  </li>
+  <li><a href="/new">Posted recently</a></li>
+</ul>
+
+<% @submissions.each do |submission| %>
+	<div class="post">
+		<img src="http://graph.facebook.com/<%= submission.user[:fbid] %>/picture">
+		<h2><%= submission[:link_title] %></h2>
+		<span>By <%= submission.user[:name] %></span>
+		<div class="video">
+			<object width="560" height="315">
+			  <param name="movie"
+			         value="https://www.youtube.com/v/<%= submission.youtube_key %>?version=3&autohide=1&showinfo=0"></param>
+			  <param name="allowScriptAccess" value="always"></param>
+			  <embed src="https://www.youtube.com/v/<%= submission.youtube_key %>?version=3&autohide=1&showinfo=0"
+			         type="application/x-shockwave-flash"
+			         allowscriptaccess="always"
+			         width="560" height="315"></embed>
+			</object>
+		</div>
+		<ul class="participants">
+			<% submission.participants.each do |participant| %>
+			<li><img src="http://graph.facebook.com/<%= participant[:fbid] %>/picture" alt="<%= participant[:name] %>"></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
