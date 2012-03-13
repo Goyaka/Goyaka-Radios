@@ -27,25 +27,27 @@ class Submission
      another.score <=> self.score
   end 
     
+    
+  # Returns only youtube entries in that list
+  #
+  def self.youtube_filter (submissions)
+    youtube_submissions = submissions.map do |entry|
+      if not entry[:link].nil? and not entry[:link].index("youtube").nil?
+        entry
+      else
+        nil
+      end
+    end
+    
+    youtube_submissions.compact
+  end
+    
   # Calculates the hotness of each post and sorts them
   #
   # Returns top hot posts.
   def self.hot
     hot_entries = Submission.limit(20).to_a.sort
-    puts hot_entries.length
-    hot_youtube_entries = hot_entries.map do |entry|
-      if not entry[:link].nil? and not entry[:link].index("youtube").nil?
-        entry
-      else
-        puts "Empty"
-        nil
-      end
-    end
-    
-    puts hot_youtube_entries.compact!.length
-    
-    hot_youtube_entries.compact!
-    hot_youtube_entries
+    Submission.youtube_filter hot_entries
   end
   
   def youtube_key
