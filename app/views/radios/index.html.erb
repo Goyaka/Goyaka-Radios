@@ -9,7 +9,7 @@
 	<div class="post">
 		<img src="http://graph.facebook.com/<%= submission.user[:fbid] %>/picture">
 		<h2><%= submission[:link_title] %></h2>
-		<span>By <%= submission.user[:name] %></span>
+		<span>By <%= submission.user[:name] %> <%= distance_of_time_in_words_to_now submission[:created] %> ago</span> 
 		<div class="video">
 			<object width="560" height="315">
 			  <param name="movie"
