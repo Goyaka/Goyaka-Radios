@@ -17,7 +17,7 @@ class Submission
   #
   # Hackernew style - www.seomoz.org/blog/reddit-stumbleupon-delicious-and-hacker-news-algorithms-exposed
   def score
-    (self[:likes].length + self[:comments].length)/ (Time.now - self[:created])
+    (self[:likes].length*2 + self[:comments].length*2)*100000/ (Time.now - self[:created])
   end
   
   # Comparator to compare by the hotness algorithm
