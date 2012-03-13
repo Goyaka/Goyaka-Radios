@@ -31,8 +31,52 @@ class Submission
   #
   # Returns top hot posts.
   def self.hot
-    Submission.limit(50).to_a.sort
+    hot_entries = Submission.limit(20).to_a.sort
+    puts hot_entries.length
+    hot_youtube_entries = hot_entries.map do |entry|
+      if not entry[:link].nil? and not entry[:link].index("youtube").nil?
+        entry
+      else
+        puts "Empty"
+        nil
+      end
+    end
+    
+    puts hot_youtube_entries.compact!.length
+    
+    hot_youtube_entries.compact!
+    hot_youtube_entries
   end
   
+  def youtube_key
+    return (/.*v=([^&.]*)/.match self[:link])[1]
+  end
   
+  def likers
+    liker_users = []
+    self[:likes].each do |like|
+      liker_users.push User.find_or_create_by_fbid(like)
+    end
+    return liker_users
+  end
+  
+  def commenters
+    commenter_users = []
+    self[:comments].each do |comment|
+      commenter_users.push User.find_or_create_by_fbid(comment)
+    end
+
+    return commenter_users
+  end
+  
+  def participants
+    (commenters + likers).uniq
+  end
+
 end
+
+module Enumerable
+  def dups
+    inject({}) {|h,v| h[v]=h[v].to_i+1; h}.reject{|k,v| v==1}.keys
+  end
+end 
