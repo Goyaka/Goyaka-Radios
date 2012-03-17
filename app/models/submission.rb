@@ -74,6 +74,20 @@ class Submission
   def participants
     (commenters + likers).uniq
   end
+  
+  def add_user_like(user)
+    self[:likes].push user[:fb_id]
+    self[:likes].uniq!
+    self.save!
+  end
+  
+  # Gets the unique facebook graph API object id.
+  # Used for commenting, liking.
+  #
+  # Returns string of id.
+  def post_object_id
+    return self[:post_id].split('_')[1]
+  end
 
 end
 
