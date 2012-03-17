@@ -175,3 +175,26 @@ html {
 		text-align:center;
 	}
 }
+
+
+.footer-logo {
+	display: inline-block;
+	position:fixed;
+	bottom:20px;
+	right:20px;
+	
+	span {
+		background: transparent url("/assets/goyaka-logo.png") no-repeat 0 2px;
+		font-family: 'Salsa', cursive;
+		font-size: 15px;
+		padding-left: 36px;
+		padding-top: 24px;
+		margin-top: 10px;
+		color:#040;
+		margin-bottom: -2px;
+	}
+}
+
+.footer-logo:hover {
+	text-decoration:none;
+}
