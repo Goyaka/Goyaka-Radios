@@ -32,7 +32,7 @@
     		<% submission.participants.each do |participant| %>
     		<li>
     		  <a href="http://www.facebook.com/<%= participant[:fbid] %>">
-    		    <img src="http://graph.facebook.com/<%= participant[:fbid] %>/picture?type=square" alt="<%= participant[:name] %>">
+    		    <img src="http://graph.facebook.com/<%= participant[:fbid] %>/picture?type=square" alt="<%= participant[:name] %>" height=40 width=40>
     		  </a>
     		</li>
     		<% end %>
