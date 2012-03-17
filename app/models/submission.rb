@@ -24,7 +24,7 @@ class Submission
     # denominator controlls freshness . We try to get a number of hours elapsd since the post was made.
     # inspired from HN algo.
     
-    ((self[:likes].length+1)*100 + self[:comments].length*1000 )*3600/ (Time.now - self[:created])
+    ((self[:likes].length)*100 + 10 + self[:comments].length*1000 )*3600/ (Time.now - self[:created])
   end
   
   # Comparator to compare by the hotness algorithm
