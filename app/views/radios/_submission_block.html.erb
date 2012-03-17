@@ -14,7 +14,16 @@
 	    <span>
 	      By <a href="http://www.facebook.com/<%= submission.user[:fbid] %>"> <%= submission.user[:name] %> </a> <%= distance_of_time_in_words_to_now submission[:created] %> ago.
 	    </span> 
-    </div>
+	  </div>
+	  <div class="pull-right">
+		
+  		<% if user_signed_in? and  not submission.current_user_likes? current_user %>
+  		<a rel="tooltip" title="Click to like this song" class="like-button btn" id="<%= submission[:post_id] %>-like-action" href="/like?post_id=<%= submission[:post_id] %>">
+			<img src="/assets/like.png" height="20px">
+		</a>
+  		<% end %>
+		  
+	  </div>
   </div>
   <div class="clear" style="margin-bottom:20px"> </div>
   <div>
@@ -22,7 +31,11 @@
       <% if submission.participants.count > 0 %>
         <div>
           <span class="pull-right">
-            <span id="<%= submission[:post_id] %>-like-count"><%= submission.participants.count %></span> liked this song
+			<% if user_signed_in? and submission.current_user_likes? current_user %> 
+            	<span id="<%= submission[:post_id] %>-like-count">You and <%= (submission.participants.count - 1) %></span> others liked this song
+			<% else %>
+            	<span id="<%= submission[:post_id] %>-like-count"><%= submission.participants.count %></span> liked this song
+			<% end %>
           </span>
         </div>
         <div class="clearfix"> </div>
@@ -38,7 +51,6 @@
     		<% end %>
     	</ul>
 		
-		<a class="like-button" id="<%= submission[:post_id] %>-like-action" href="/like?post_id=<%= submission[:post_id] %>">Like</a>
     </div>
   	
     <div class="video">
