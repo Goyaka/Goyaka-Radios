@@ -38,6 +38,7 @@ gem 'capistrano-ext'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+gem 'bson'
 gem 'bson_ext'
 gem 'mongo'
 gem 'mongoid'
@@ -49,3 +50,6 @@ gem 'fb_graph'
 
 # Twitter Bootstrap
 gem 'bootstrap-sass'
+
+# User Management
+gem 'devise'
