@@ -1,11 +1,16 @@
 $(document).ready ->
 	$('.participant').tooltip();
 	$('img').lazyload();
-	$('.like-button').click -> 
+	
+	ajaxsuccess = (data)->
+		node = $('#' + data['post_id'] + '-like-action')
+		node.html("Successful AJAX call")
+				
+	$('.like-button').click ->
+		$(this).html('Liking..') 
 		$.ajax this.href,
-		    type: 'GET'
-		    dataType: 'json' 
-			error: (jqXHR, textStatus, errorThrown) ->
-		        $('body').append "AJAX Error: #{textStatus}"
-		    success: (data, textStatus, jqXHR) ->
-		        $('body').append "Successful AJAX call: #{data}"
+		    type: 'GET',
+		    dataType: 'json', 
+		    success: ajaxsuccess 
+				
+		return false
