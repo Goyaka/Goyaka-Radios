@@ -41,6 +41,8 @@ class FacebookFetcher
       likes.push liker_user[:fbid]
     end
     
+    
+    
     comments = []
     feed.comments.each do |comment|
       commenter = User.find_or_create_by_fbid(comment.from.identifier, comment.from.name)
@@ -49,6 +51,8 @@ class FacebookFetcher
     
     submission[:likes]    = likes.compact
     submission[:comments] = comments.compact
+    submission[:likes_count] = feed.as_json['cached_collections'][:likes].nil? ? 0 : feed.as_json['cached_collections'][:likes]['count']
+    submission[:comments_count] = feed.as_json['cached_collections'][:comments].nil? ? 0 : feed.as_json['cached_collections'][:comments]['count']
     submission.save!
   end
    
@@ -63,7 +67,7 @@ class FacebookFetcher
       puts "Updating (#{feed.message})"
       fetcher.update_submission(feed)
     end
-    return feeds
+    return feeds.length
   end
 
 end

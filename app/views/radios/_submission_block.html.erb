@@ -32,9 +32,9 @@
         <div>
           <span class="pull-right">
 			<% if user_signed_in? and submission.current_user_likes? current_user %> 
-            	<span id="<%= submission[:post_id] %>-like-count">You and <%= (submission.participants.count - 1) %></span> others liked this song
+			<span id="<%= submission[:post_id] %>-like-count">You and <%= (submission.participants_count - 1) %></span> others liked this song
 			<% else %>
-            	<span id="<%= submission[:post_id] %>-like-count"><%= submission.participants.count %></span> liked this song
+            	<span id="<%= submission[:post_id] %>-like-count"><%= submission.participants_count %></span> liked this song
 			<% end %>
           </span>
         </div>

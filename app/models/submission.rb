@@ -8,6 +8,8 @@ class Submission
   field :message, type: String
   field :likes, type: Array
   field :comments, type: Array
+  field :likes_count, type: Integer
+  field :comments_count, type: Integer
   
   belongs_to :user
   
@@ -24,7 +26,7 @@ class Submission
     # denominator controlls freshness . We try to get a number of hours elapsd since the post was made.
     # inspired from HN algo.
     
-    ((self[:likes].length)*100 + 10 + self[:comments].length*1000 )*3600/ (Time.now - self[:created])
+    ((self[:likes_count])*100 + 10 + self[:comments_count]*1000 )*3600/ (Time.now - self[:created])
   end
   
   # Comparator to compare by the hotness algorithm
@@ -82,14 +84,25 @@ class Submission
     (commenters + likers).uniq
   end
   
+  def participants_count
+    self[:comments_count] + self[:likes_count]
+  end
+  
   def add_user_like(user)
     likes = self[:likes]
+    likes_count = self[:likes_count]
     likes.push user[:fbid]
     likes.uniq!
     likes.compact!
+    
+    #For some reason, direct saving values doesn't work
+    #Saving twice works. Bleh
     self[:likes] = []
+    self[:likes_count] = 0
     self.save!
+    
     self[:likes] = likes
+    self[:likes_count] = likes_count + 1
     self.save!
   end
   
@@ -109,7 +122,7 @@ class Submission
     participants      = (self[:likes] + self[:comments]).uniq
     return participants.include? current_user_fbid
   end
-
+  
 end
 
 module Enumerable
