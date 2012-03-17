@@ -55,10 +55,10 @@ class FacebookFetcher
   # Updates the database from facebook feed.
   #
   # Returns nothing.
-  def self.fetch_feeds
+  def self.fetch_feeds(limit = 20)
     fetcher = self.new(APP_CONFIG['group_id'], APP_CONFIG['access_token'])
     puts "Fetching feeds"
-    feeds   = fetcher.group.feed(:limit => 20)
+    feeds   = fetcher.group.feed(:limit => limit)
     feeds.each do |feed|
       puts "Updating (#{feed.message})"
       fetcher.update_submission(feed)
