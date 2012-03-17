@@ -19,14 +19,6 @@
 
 		</div>
 	</div>
-	
-	<div class="user-login">
-	<% if user_signed_in? and current_user %>
-	<a href="#" class="btn"><%= current_user.name %></a>
-	<% else %>
-	<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => 'btn' %>
-	<% end %>
-	</div>
 </div>
 <div id="content">
     <div id="content-inner">
