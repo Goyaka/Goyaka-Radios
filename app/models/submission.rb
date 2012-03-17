@@ -83,8 +83,9 @@ class Submission
   end
   
   def add_user_like(user)
-    self[:likes].push user[:fb_id]
+    self[:likes].push user[:fbid]
     self[:likes].uniq!
+    self[:likes].compact!
     self.save!
   end
   
