@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.tmpl.min
+//= require jquery.effects.core
+//= require jquery.effects.highlight
 //
 // Loads all Bootstrap javascripts
 //= require bootstrap
