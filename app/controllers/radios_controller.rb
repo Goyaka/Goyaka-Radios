@@ -15,6 +15,6 @@ class RadiosController < ApplicationController
     post.like!(:access_token => current_user[:credentials]['token'])
     submission.add_user_like current_user
     
-    render :json => {'status' => 'OK'}
+    render :json => {'status' => 'OK', 'post_id' => params[:post_id]}
   end
 end
