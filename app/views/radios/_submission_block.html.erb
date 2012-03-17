@@ -2,7 +2,7 @@
   <div class="post-main row">
     <div class="span1">
 	    <a href="http://www.facebook.com/<%= submission.user[:fbid] %>">
-	      <img class="thumb" src="http://graph.facebook.com/<%= submission.user[:fbid] %>/picture" width=75 height=75>
+	      <img class="thumb" src="/assets/default-user.gif" data-src="http://graph.facebook.com/<%= submission.user[:fbid] %>/picture" width=75 height=75>
 	    </a>
 	  </div>
 	  <div class="span-10">
@@ -22,21 +22,23 @@
       <% if submission.participants.count > 0 %>
         <div>
           <a href="https://www.facebook.com/<%= submission[:post_id] %>" style="float: right; padding-bottom: 10px;">
-            <%= submission.participants.count %> liked this song!
+            <span id="<%= submission[:post_id] %>-like-count"><%= submission.participants.count %></span> liked this song!
           </a>
         </div>
         <div class="clearfix"> </div>
       <% end %>
       
-      <ul class="participants">
+      <ul class="participants" id="<%= submission[:post_id] %>-like-people">
     		<% submission.participants.each do |participant| %>
     		<li>
-    		  <a href="http://www.facebook.com/<%= participant[:fbid] %>">
-    		    <img src="http://graph.facebook.com/<%= participant[:fbid] %>/picture?type=square" alt="<%= participant[:name] %>" height=40 width=40>
+    		  <a href="http://www.facebook.com/<%= participant[:fbid] %>"  class="participant" rel="tooltip" title="<%= participant[:name] %>">
+    		    <img src="/assets/default-user.gif" data-src="http://graph.facebook.com/<%= participant[:fbid] %>/picture?type=square" alt="<%= participant[:name] %>">
     		  </a>
     		</li>
     		<% end %>
     	</ul>
+		
+		<a class="like-button" id="<%= submission[:post_id] %>-like-action" href="/like?id=<%= submission[:post_id] %>">Like</a>
     </div>
   	
     <div class="video">
