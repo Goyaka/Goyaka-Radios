@@ -34,7 +34,7 @@ class User
   end
 
   def self.find_or_create_from_omniauth(data)
-    user = User.find_or_create_by_fbid(data['uid'])
+    user = User.find_or_create_by_fbid(data['uid'], data['info']['name'])
     if user.credentials.nil? 
       user.credentials = data['credentials']
       user.update_profile data['raw_info']
