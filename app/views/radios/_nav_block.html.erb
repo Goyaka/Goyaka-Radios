@@ -1,0 +1,12 @@
+<ul class="nav nav-pills span5">
+  <li class="<%= css[:trend] %>"> <a href="/">Trending songs</a> </li>
+  <li class="<%= css[:new] %>"><a href="/new">Posted recently</a></li>
+</ul>
+
+<div class="user-login pull-right">
+<% if user_signed_in? and current_user %>
+Signed in as <a href="http://facebook.com/<%= current_user[:fbid] %>"><%= current_user.name %></a>
+<% else %>
+	<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => 'btn btn-info' %>
+<% end %>
+</div>

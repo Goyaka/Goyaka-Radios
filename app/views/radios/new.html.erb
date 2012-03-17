@@ -1,9 +1,4 @@
-<ul class="nav nav-pills">
-  <li><a href="/">Trending songs</a></li>
-  <li class="active">
-	  <a href="/new">Posted recently</a>
-  </li>
-</ul>
+<%= render :partial => "nav_block", :locals => {:css => {:new => 'active', :trend => ''}} %>
 
 <% @submissions.each do |submission| %>
   <%= render :partial => "submission_block", :locals => { :submission => submission } %>
