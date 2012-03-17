@@ -22,10 +22,9 @@
 	
 	<div class="user-login">
 	<% if user_signed_in? and current_user %>
-	<%= debug current_user %>
-	Signed in as <%= current_user.name %>
+	<a href="#" class="btn"><%= current_user.name %></a>
 	<% else %>
-	<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+	<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => 'btn' %>
 	<% end %>
 	</div>
 </div>
