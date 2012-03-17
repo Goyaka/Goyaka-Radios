@@ -212,7 +212,12 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   require "omniauth-facebook"
-  config.omniauth :facebook, "191496827557867", "679401f4ef91e6eb41fc02cc535c725a", {:scope => 'offline_access,user_groups,publish_stream'}
+  
+  if Rails.env == "development"
+    config.omniauth :facebook, "191496827557867", "679401f4ef91e6eb41fc02cc535c725a", {:scope => 'offline_access,user_groups,publish_stream'}
+  else
+    config.omniauth :facebook, ENV['FB_API_KEY'], ENV['FB_API_SECRET'], {:scope => 'offline_access,user_groups,publish_stream'}
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
