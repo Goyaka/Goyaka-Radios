@@ -10,6 +10,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'thin'
+gem 'foreman'
+
 gem 'jquery-rails'
 gem 'bson_ext'
 gem 'mongo'
