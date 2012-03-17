@@ -101,6 +101,15 @@ class Submission
     return self[:post_id].split('_')[1]
   end
 
+  # Check whether current user likes
+  #
+  # Returns boolean
+  def current_user_likes? current_user
+    current_user_fbid = current_user[:fbid]
+    participants      = (self[:likes] + self[:comments]).uniq
+    return participants.include? current_user_fbid
+  end
+
 end
 
 module Enumerable
