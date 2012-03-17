@@ -21,9 +21,9 @@
     <div class="post-meta">
       <% if submission.participants.count > 0 %>
         <div>
-          <a href="https://www.facebook.com/<%= submission[:post_id] %>" style="float: right; padding-bottom: 10px;">
-            <span id="<%= submission[:post_id] %>-like-count"><%= submission.participants.count %></span> liked this song!
-          </a>
+          <span class="pull-right">
+            <span id="<%= submission[:post_id] %>-like-count"><%= submission.participants.count %></span> liked this song
+          </span>
         </div>
         <div class="clearfix"> </div>
       <% end %>

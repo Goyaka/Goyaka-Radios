@@ -83,9 +83,13 @@ class Submission
   end
   
   def add_user_like(user)
-    self[:likes].push user[:fbid]
-    self[:likes].uniq!
-    self[:likes].compact!
+    likes = self[:likes]
+    likes.push user[:fbid]
+    likes.uniq!
+    likes.compact!
+    self[:likes] = []
+    self.save!
+    self[:likes] = likes
     self.save!
   end
   

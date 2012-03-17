@@ -32,6 +32,12 @@
     <div id="content-inner">
        <%= yield %>
     </div>
+	<% if user_signed_in? and current_user %>
+	<script type="text/javascript">
+	var current_user = { 'fbid' : '<%= current_user[:fbid] %>',
+				 'name' : '<%= current_user[:name] %>' };
+	</script>
+	<% end %>
 </div>
 </body>
 </html>
