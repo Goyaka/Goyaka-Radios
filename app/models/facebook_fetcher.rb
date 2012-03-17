@@ -56,7 +56,6 @@ class FacebookFetcher
   #
   # Returns nothing.
   def self.fetch_feeds
-    pp APP_CONFIG
     fetcher = self.new(APP_CONFIG['group_id'], APP_CONFIG['access_token'])
     puts "Fetching feeds"
     feeds   = fetcher.group.feed(:limit => 20)
