@@ -63,6 +63,7 @@ class FacebookFetcher
       puts "Updating (#{feed.message})"
       fetcher.update_submission(feed)
     end
+    return feeds
   end
 
 end
