@@ -53,3 +53,4 @@ gem 'bootstrap-sass'
 
 # User Management
 gem 'devise'
+gem "omniauth-facebook"

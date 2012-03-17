@@ -13,6 +13,7 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
+  field :credentials,        :type => Hash
   
   # Facebook id
   field :fbid, type: String
@@ -29,7 +30,21 @@ class User
       u = User.where(:fbid => fbid).first
     end
     
-    
     return u
+  end
+
+  def self.find_or_create_from_omniauth(data)
+    user = User.find_or_create_by_fbid(data['uid'])
+    if user.credentials.nil? 
+      user.credentials = data['credentials']
+      user.update_profile data['raw_info']
+      user.save!
+    end
+    
+    return user
+  end
+  
+  def update_profile(raw_info)
+    
   end
 end
