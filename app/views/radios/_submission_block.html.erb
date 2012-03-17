@@ -1,23 +1,55 @@
 <div class="post">
-	<img src="http://graph.facebook.com/<%= submission.user[:fbid] %>/picture">
-	<h2><%= submission[:link_title] %></h2>
-	<span>By <%= submission.user[:name] %> <%= distance_of_time_in_words_to_now submission[:created] %> ago</span> 
-	<div class="video">
-		<object width="560" height="315">
-		  <param name="movie"
-		         value="https://www.youtube.com/v/<%= submission.youtube_key %>?version=3&autohide=1&showinfo=0"></param>
-		  <param name="allowScriptAccess" value="always"></param>
-		  <embed src="https://www.youtube.com/v/<%= submission.youtube_key %>?version=3&autohide=1&showinfo=0"
-		         type="application/x-shockwave-flash"
-		         allowscriptaccess="always"
-		         width="560" height="315"></embed>
-		</object>
+  <div class="post-main row">
+    <div class="span1">
+	    <a href="http://www.facebook.com/<%= submission.user[:fbid] %>">
+	      <img src="http://graph.facebook.com/<%= submission.user[:fbid] %>/picture" width=75 height=75>
+	    </a>
+	  </div>
+	  <div class="span-10">
+	    <h2>
+	      <a href="https://www.facebook.com/<%= submission[:post_id].split('_')[1] %>">
+	        <%= submission[:link_title] %> 
+	      </a>
+	    </h2>
+	    <span>
+	      By <a href="http://www.facebook.com/<%= submission.user[:fbid] %>"> <%= submission.user[:name] %> </a> <%= distance_of_time_in_words_to_now submission[:created] %> ago.
+	    </span> 
+    </div>
+  </div>
+  <div class="clear" style="margin-bottom:20px"> </div>
+  <div>
+    <div class="post-meta">
+      <% if submission.participants.count > 0 %>
+        <div>
+          <a href="https://www.facebook.com/<%= submission[:post_id] %>" style="float: right; padding-bottom: 10px;">
+            <%= submission.participants.count %> liked this song!
+          </a>
+        </div>
+        <div class="clearfix"> </div>
+      <% end %>
+      
+      <ul class="participants">
+    		<% submission.participants.each do |participant| %>
+    		<li>
+    		  <a href="http://www.facebook.com/<%= participant[:fbid] %>">
+    		    <img src="http://graph.facebook.com/<%= participant[:fbid] %>/picture?type=square" alt="<%= participant[:name] %>">
+    		  </a>
+    		</li>
+    		<% end %>
+    	</ul>
+    </div>
+  	
+    <div class="video">
+      <object width="560" height="315">
+        <param name="movie"
+        value="https://www.youtube.com/v/<%= submission.youtube_key %>?version=3&autohide=1&showinfo=0"></param>
+        <param name="allowScriptAccess" value="always"></param>
+        <embed src="https://www.youtube.com/v/<%= submission.youtube_key %>?version=3&autohide=1&showinfo=0"
+          type="application/x-shockwave-flash"
+          allowscriptaccess="always"
+          width="560" height="315"></embed>
+      </object>
+    </div>
 	</div>
-	<ul class="participants">
-		<% submission.participants.each do |participant| %>
-		<li><img src="http://graph.facebook.com/<%= participant[:fbid] %>/picture" alt="<%= participant[:name] %>"></li>
-		<% end %>
-	</ul>
-	
 	<div>Score : <%= submission.score %></div>
 </div>
