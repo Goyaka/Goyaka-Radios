@@ -17,7 +17,14 @@ class Submission
   #
   # Hackernew style - www.seomoz.org/blog/reddit-stumbleupon-delicious-and-hacker-news-algorithms-exposed
   def score
-    (self[:likes].length*10 + self[:comments].length*10 )*100000/ (Time.now - self[:created])
+    # numerator controlls rating factor
+    # Comments carry 10 times weightage as likes.
+    # by default, all posts get a like
+    #
+    # denominator controlls freshness . We try to get a number of hours elapsd since the post was made.
+    # inspired from HN algo.
+    
+    ((self[:likes].length+1)*100 + self[:comments].length*1000 )*3600/ (Time.now - self[:created])
   end
   
   # Comparator to compare by the hotness algorithm
