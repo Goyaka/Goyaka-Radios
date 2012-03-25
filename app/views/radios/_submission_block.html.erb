@@ -56,9 +56,9 @@
     <div class="video">
       <object width="560" height="315">
         <param name="movie"
-        value="https://www.youtube.com/v/<%= submission.youtube_key %>?version=3&autohide=1&showinfo=0"></param>
+        value="https://www.youtube.com/v/<%= submission.youtube_key %>?enablejsapi=1&version=3&autohide=1&showinfo=0"></param>
         <param name="allowScriptAccess" value="always"></param>
-        <embed src="https://www.youtube.com/v/<%= submission.youtube_key %>?version=3&autohide=1&showinfo=0"
+        <embed id="<%= submission[:post_id] %>-video" class="video-embed" src="https://www.youtube.com/v/<%= submission.youtube_key %>?enablejsapi=1&version=3&autohide=1&showinfo=0"
           type="application/x-shockwave-flash"
           allowscriptaccess="always"
           width="560" height="315"></embed>

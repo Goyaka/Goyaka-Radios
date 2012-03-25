@@ -17,4 +17,8 @@ class RadiosController < ApplicationController
     
     render :json => {'status' => 'OK', 'post_id' => params[:post_id]}
   end
+  
+  def listen
+    
+  end
 end
